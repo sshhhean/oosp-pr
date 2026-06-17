@@ -1,0 +1,58 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+
+public class StudentListManager {
+    private static final String FILE_NAME = "students.txt";
+
+    public static void main(String[] args) {
+        List<String> students = Arrays.asList(
+            "Бурмалда Глеб",
+            "Подмышкина Елизавета",
+            "Донбасс Виталий",
+            "Козявкин Константин",
+            "Воздуханов Дмитрий"
+        );
+
+        System.out.println("=== Сохранение списка студентов в файл ===");
+        saveStudentsToFile(students);
+
+        System.out.println("\n=== Чтение списка студентов из файла ===");
+        loadStudentsFromFile();
+    }
+    public static void saveStudentsToFile(List<String> students) {
+        try (FileWriter writer = new FileWriter(FILE_NAME)) {
+            for (String student : students) {
+                writer.write(student + "\n");
+            }
+            System.out.println("Список студентов успешно записан в файл " + FILE_NAME);
+            System.out.println("Записано студентов: " + students.size());
+        } catch (IOException e) {
+            System.err.println("Ошибка при записи в файл: " + e.getMessage());
+        }
+    }
+    public static void loadStudentsFromFile() {
+        try {
+            // Читаем все строки из файла
+            List<String> loadedStudents = Files.readAllLines(Paths.get(FILE_NAME));
+            
+            System.out.println("Файл успешно прочитан");
+            System.out.println("Найдено студентов: " + loadedStudents.size());
+            System.out.println("\nСписок студентов:");
+            System.out.println("-------------------");
+
+            for (int i = 0; i < loadedStudents.size(); i++) {
+                System.out.println((i + 1) + ". " + loadedStudents.get(i));
+            }
+            
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+            System.err.println("Возможные причины:");
+            System.err.println("  - Файл не найден");
+            System.err.println("  - Нет прав на чтение");
+        }
+    }
+}
