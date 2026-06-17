@@ -1,0 +1,53 @@
+14
+
+public class LetterTask implements Runnable {
+    @id86240433 (@Override)
+    public void run() {
+        try {
+            for (char c = 'A'; c <= 'E'; c++) {
+                System.out.println("Буква: " + c);
+                Thread.sleep(700);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Поток букв был прерван");
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Основной поток: " + Thread.currentThread().getName());
+        System.out.println();
+
+        NumberTask numberTask = new NumberTask();
+        LetterTask letterTask = new LetterTask();
+
+        Thread threadNumbers = new Thread(numberTask);
+        Thread threadLetters = new Thread(letterTask);
+
+        threadNumbers.start();
+        threadLetters.start();
+
+        try {
+            threadNumbers.join();
+            threadLetters.join();
+        } catch (InterruptedException e) {
+            System.out.println("Основной поток был прерван");
+        }
+
+        System.out.println();
+    }
+}
+
+public class NumberTask implements Runnable {
+    @id86240433 (@Override)
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Число: " + i);
+                Thread.sleep(500);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Поток чисел был прерван");
+        }
+    }
+}
