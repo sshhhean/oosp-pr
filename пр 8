@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ToDoList {
+    public static void main(String[] args) {
+        ArrayList<String> tasks = new ArrayList<>();
+
+        tasks.add("Сделать домашнее задание по Java");
+        tasks.add("Прочитать главу 5 учебника");
+        tasks.add("Потренировать методы ArrayList");
+
+        System.out.println("Все задачи:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+        System.out.println();
+
+        System.out.println("Удаление второй задачи...");
+        tasks.remove(1);
+        System.out.println("Задача успешно удалена!\n");
+
+        System.out.println("Задачи после удаления:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+        System.out.println();
+
+        String searchTask = "Ваша задача";
+        if (tasks.contains(searchTask)) {
+            System.out.println("Список содержит: \"" + searchTask + "\"");
+        } else {
+            System.out.println("Список НЕ содержит: \"" + searchTask + "\"");
+        }
+
+        String existingTask = "Сделать домашнее задание по Java";
+        if (tasks.contains(existingTask)) {
+            System.out.println("Список содержит: \"" + existingTask + "\"");
+        }
+        System.out.println();
+
+        System.out.println("Сортировка задач по алфавиту...");
+        Collections.sort(tasks);
+
+        System.out.println("Отсортированные задачи:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+
+        System.out.println("\nВсего задач: " + tasks.size());
+     
+        System.out.println("Список пуст? " + tasks.isEmpty());
+    }
+}
