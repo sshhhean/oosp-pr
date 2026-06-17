@@ -1,0 +1,60 @@
+abstract class Vehicle {
+    protected String brand;
+    protected int year;
+
+    public Vehicle(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+
+    public void start() {
+        System.out.println("Транспортное средство заведено");
+    }
+}
+
+class Car extends Vehicle {
+    private int numberOfDoors;
+
+    public Car(String brand, int year, int numberOfDoors) {
+        super(brand, year);
+        this.numberOfDoors = numberOfDoors;
+    }
+
+    @id86240433 (@Override)
+    public void start() {
+        System.out.println("Автомобиль " + brand + " заведён");
+    }
+
+    public int getNumberOfDoors() {
+        return numberOfDoors;
+    }
+}
+
+class Motorcycle extends Vehicle {
+    public Motorcycle(String brand, int year) {
+        super(brand, year);
+    }
+
+    @id86240433 (@Override)
+    public void start() {
+        System.out.println("Мотоцикл " + brand + " заведён");
+    }
+}
+
+public class VehicleTest {
+    public static void main(String[] args) {
+        // Создание объекта Car
+        Car myCar = new Car("Toyota", 2020, 4);
+
+        Motorcycle myMotorcycle = new Motorcycle("Harley-Davidson", 2019);
+
+        myCar.start();
+        System.out.println("Количество дверей: " + myCar.getNumberOfDoors());
+        System.out.println("Год выпуска: " + myCar.year);
+
+        System.out.println();
+
+        myMotorcycle.start();
+        System.out.println("Год выпуска: " + myMotorcycle.year);
+    }
+}
