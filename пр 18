@@ -1,0 +1,64 @@
+18
+
+public class Main {
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {5, 8, 3},
+                {2, 7, 4},
+                {9, 1, 6}
+        };
+
+        int sum = 0;
+
+        for (int i = 0; i < 3; i++) {        
+            for (int j = 0; j < 3; j++) { 
+                sum = sum + matrix[i][j];
+            }
+        }
+
+        System.out.println("Сумма всех элементов матрицы: " + sum);
+    }
+}
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
+
+public class StudentGrades {
+    public static void main(String[] args) {
+
+        List<String> studentsList = new ArrayList<>();
+
+        studentsList.add("Анна");
+        studentsList.add("Иван");
+        studentsList.add("Мария");
+        studentsList.add("Иван");  // повтор
+        studentsList.add("Дмитрий");
+
+        System.out.println(studentsList);
+        System.out.println("Количество элементов: " + studentsList.size());
+        System.out.println();
+
+        Set<String> uniqueStudents = new HashSet<>(studentsList);
+
+        System.out.println(uniqueStudents);
+        System.out.println("Количество уникальных студентов: " + uniqueStudents.size());
+        System.out.println();
+
+        Map<String, Integer> studentGrades = new HashMap<>();
+
+        studentGrades.put("Анна", 95);
+        studentGrades.put("Иван", 78);
+        studentGrades.put("Мария", 88);
+        studentGrades.put("Дмитрий", 92);
+
+        System.out.println("Результаты студентов (HashMap):");
+        System.out.println("Имя  Балл");
+        for (Map.Entry<String, Integer> entry : studentGrades.entrySet()) {
+            System.out.println(entry.getKey() +  + entry.getValue());
+        }
+    }
+}
