@@ -1,0 +1,22 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class StreamDemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, -2, 3, -4, 5);
+        
+        System.out.println("Исходный список: " + numbers);
+        List<Integer> result = numbers.stream()
+                .filter(n -> n > 0)
+                .map(n -> n * n)
+                .collect(Collectors.toList());
+        
+        System.out.println("Результирующий список: " + result);
+        
+        System.out.println("\nПошаговое объяснение:");
+        System.out.println("1. Исходные числа: " + numbers);
+        System.out.println("2. После фильтрации (n > 0): " + 
+            numbers.stream().filter(n -> n > 0).collect(Collectors.toList()));
+        System.out.println("3. После возведения в квадрат: " + result);
+    }
+}
