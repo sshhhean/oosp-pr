@@ -1,0 +1,32 @@
+public class Main {
+
+    public static int sum(int a, int b) {
+        return a + b;
+    }
+
+    public static int sum(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    public static boolean isEven(int number) {
+        return number % 2 == 0;
+    }
+
+    public static void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void main(String[] args) {
+
+        int result1 = sum(5, 7);
+        System.out.println("Сумма двух чисел: " + result1);
+
+        int result2 = sum(5, 7, 3);
+        System.out.println("Сумма трёх чисел: " + result2);
+
+        int number = 10;
+        System.out.println(number + " чётное? " + isEven(number));
+
+        printMessage("Привет, Java!");
+    }
+}
