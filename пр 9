@@ -1,0 +1,43 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class ExceptionHandlingDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean success = false;
+        
+        System.out.println("=== ПРОГРАММА БЕЗОПАСНОГО ДЕЛЕНИЯ ===");
+        System.out.println("Программа запрашивает два целых числа и выполняет их деление.\n");
+        
+        while (!success) {
+            try {
+                System.out.print("Введите первое целое число (делимое): ");
+                int num1 = scanner.nextInt();
+                
+                System.out.print("Введите второе целое число (делитель): ");
+                int num2 = scanner.nextInt();
+                
+                double result = (double) num1 / num2;
+                
+                System.out.println("\nРезультат деления " + num1 + " на " + num2 + " = " + result);
+                success = true;
+                
+            } catch (InputMismatchException e) {
+                System.err.println("ОШИБКА: Введено не число! Пожалуйста, введите целое число.");
+                scanner.next();
+                System.out.println("Попробуйте снова.\n");
+                
+            } catch (ArithmeticException e) {
+                System.err.println("ОШИБКА: Деление на ноль невозможно! Пожалуйста, введите делитель, отличный от нуля.");
+                System.out.println("Попробуйте снова.\n");
+                
+            } finally {
+                System.out.println("--- Операция деления выполнена (или была предпринята попытка) ---");
+                System.out.println("Блок finally выполнен.");
+            }
+        }
+        
+        System.out.println("\n=== ПРОГРАММА ЗАВЕРШЕНА ===");
+        scanner.close();
+    }
+}
