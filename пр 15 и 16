@@ -1,0 +1,98 @@
+import java.util.Random;
+
+public class ArrayTasks {
+    public static void main(String[] args) {
+        System.out.println("========== ЗАДАНИЕ 1: ОДНОМЕРНЫЙ МАССИВ ==========");
+        task1();
+        
+        System.out.println("\n========== ЗАДАНИЕ 2: ДВУМЕРНАЯ МАТРИЦА ==========");
+        task2(5);
+        
+        System.out.println("\n========== ЗАДАНИЕ 3: ТРЕУГОЛЬНИК ПАСКАЛЯ ==========");
+        task3(7);
+    }
+    
+    //ЗАДАНИЕ 1
+    public static void task1() {
+        Random random = new Random();
+        int size = 10;
+        
+        int[] array = new int[size];
+        System.out.print("Сгенерированный массив: ");
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextInt(100);
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+        
+        int min = array[0];
+        int max = array[0];
+        int minIndex = 0;
+        int maxIndex = 0;
+        
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+                minIndex = i;
+            }
+            if (array[i] > max) {
+                max = array[i];
+                maxIndex = i;
+            }
+        }
+        
+        System.out.println("Минимальный элемент: " + min + " (индекс " + minIndex + ")");
+        System.out.println("Максимальный элемент: " + max + " (индекс " + maxIndex + ")");
+    }
+    
+    // 2 ЗАДАНИЕ
+    public static void task2(int n) {
+        int[][] matrix = new int[n][n];
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j) {
+                    matrix[i][j] = 1;
+                } else {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+        System.out.println("Квадратная матрица " + n + "x" + n + " (единицы на главной диагонали):");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    
+    //3 ЗАДАНИЕ
+    public static void task3(int rows) {
+        int[][] pascal = new int[rows][];
+        
+        for (int i = 0; i < rows; i++) {
+            pascal[i] = new int[i + 1];
+            
+            pascal[i][0] = 1;
+            pascal[i][i] = 1;
+            
+            for (int j = 1; j < i; j++) {
+                pascal[i][j] = pascal[i - 1][j - 1] + pascal[i - 1][j];
+            }
+        }
+        
+        System.out.println("Треугольник Паскаля (" + rows + " строк):");
+        for (int i = 0; i < rows; i++) {
+            for (int space = 0; space < (rows - i - 1) * 2; space++) {
+                System.out.print(" ");
+            }
+            
+            for (int j = 0; j < pascal[i].length; j++) {
+                System.out.print(pascal[i][j] + "   ");
+            }
+            System.out.println();
+        }
+    }
+}
