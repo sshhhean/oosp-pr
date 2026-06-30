@@ -1,0 +1,109 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class GradeJournal {
+    public static void main(String[] args) {
+        HashMap<String, Integer> journal = new HashMap<>();
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("========== ЖУРНАЛ УСПЕВАЕМОСТИ ==========\n");
+        
+        journal.put("Анна", 95);
+        journal.put("Сергей", 78);
+        journal.put("Елена", 88);
+        journal.put("Дмитрий", 62);
+        journal.put("Ольга", 91);
+        
+        System.out.println("Журнал успеваемости заполнен:");
+        printJournal(journal);
+        
+        System.out.print("\nВведите имя студента для получения оценки: ");
+        String searchName = scanner.nextLine();
+        Integer grade = journal.get(searchName);
+        
+        if (grade != null) {
+            System.out.println("Оценка студента " + searchName + ": " + grade);
+        } else {
+            System.out.println("Студент с именем \"" + searchName + "\" не найден в журнале.");
+        }
+        
+        System.out.print("\nВведите имя для проверки наличия в журнале: ");
+        String checkName = scanner.nextLine();
+        
+        if (journal.containsKey(checkName)) {
+            System.out.println("✓ Студент \"" + checkName + "\" присутствует в журнале.");
+            System.out.println("  Его оценка: " + journal.get(checkName));
+        } else {
+            System.out.println("✗ Студент \"" + checkName + "\" отсутствует в журнале.");
+        }
+        
+        System.out.print("\nВведите имя студента для удаления из журнала: ");
+        String removeName = scanner.nextLine();
+        Integer removedGrade = journal.remove(removeName);
+        
+        if (removedGrade != null) {
+            System.out.println("✓ Студент \"" + removeName + "\" (оценка " + removedGrade + ") удален из журнала.");
+        } else {
+            System.out.println("✗ Студент \"" + removeName + "\" не найден. Удаление не выполнено.");
+        }
+        
+        System.out.println("\nОбновленный журнал успеваемости:");
+        printJournal(journal);
+        
+        printStatistics(journal);
+        
+        scanner.close();
+    }
+    
+    public static void printJournal(HashMap<String, Integer> journal) {
+        if (journal.isEmpty()) {
+            System.out.println("  (Журнал пуст)");
+            return;
+        }
+        
+        System.out.println("+----------------------+----------+");
+        System.out.println("| Имя студента         | Оценка   |");
+        System.out.println("+----------------------+----------+");
+        
+        for (Map.Entry<String, Integer> entry : journal.entrySet()) {
+            System.out.printf("| %-20s | %-8d |%n", entry.getKey(), entry.getValue());
+        }
+        System.out.println("+----------------------+----------+");
+        System.out.println("Всего студентов: " + journal.size());
+    }
+    
+    public static void printStatistics(HashMap<String, Integer> journal) {
+        if (journal.isEmpty()) {
+            System.out.println("\nСтатистика недоступна (журнал пуст).");
+            return;
+        }
+        
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        String maxStudent = "";
+        String minStudent = "";
+        
+        for (Map.Entry<String, Integer> entry : journal.entrySet()) {
+            int grade = entry.getValue();
+            sum += grade;
+            
+            if (grade > max) {
+                max = grade;
+                maxStudent = entry.getKey();
+            }
+            if (grade < min) {
+                min = grade;
+                minStudent = entry.getKey();
+            }
+        }
+        
+        double average = (double) sum / journal.size();
+        
+        System.out.println("\n--- СТАТИСТИКА ЖУРНАЛА ---");
+        System.out.printf("Средняя оценка: %.2f%n", average);
+        System.out.println("Лучший студент: " + maxStudent + " (" + max + " баллов)");
+        System.out.println("Худший студент: " + minStudent + " (" + min + " баллов)");
+    }
+}
